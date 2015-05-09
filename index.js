@@ -1,6 +1,5 @@
 var request = require("request");
 var cheerio = require("cheerio");
-var fs = require('fs');
 var mailregex = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/g
 
 var domain = process.argv[2]
@@ -8,13 +7,11 @@ var pages =  process.argv[3] * 10
 
 function getMatches(string, regex, index) {
   index || (index = 1); // default to the first capturing group
-  var matches = [];
   var match;
   while (match = regex.exec(string)) {
     console.log(match[0])
-    matches.push(match[index]);
   }
-  return matches;
+  return true;
 }
 
 console.log("#" + domain)
