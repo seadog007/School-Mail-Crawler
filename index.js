@@ -19,16 +19,17 @@ console.log("#" + domain)
 toGoogleReq();
 
 function toGoogleReq() {
-	url="https://www.google.com.tw/search?q=%e5%b8%ab%e8%b3%87+OR+email+OR+e-mail+OR+%e4%bf%a1%e7%ae%b1+OR+%e9%83%b5%e4%bb%b6+site%3a" + domain + "+-filetype:pdf+-filetype:doc&start=" + curPage
-	console.log(url)
+	var url = "https://www.google.com.tw/search?q=%e5%b8%ab%e8%b3%87+OR+email+OR+e-mail+OR+%e4%bf%a1%e7%ae%b1+OR+%e9%83%b5%e4%bb%b6+site%3a" + domain + "+-filetype:pdf+-filetype:doc&start=" + curPage
+	//console.log(url)
 	request({
 		url: url,
-		headers: {'User-Agent': 'w3m/0.5.3+debian-15'},
+		headers: {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36'},
 		method: "GET"
 	}, function(e,r,b) {
 		curPage += 10;
-		if (curPage <= pages) setTimeout(toGoogleReq, 10000);
+		if (curPage <= pages) setTimeout(toGoogleReq, 15000);
 		$ = cheerio.load(b);
+		//console.log(b);
 		$('.srg>.g>.rc>.r>a').map(
 			function () {
 				request({
