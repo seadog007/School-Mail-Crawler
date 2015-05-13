@@ -21,7 +21,7 @@ toGoogleReq();
 function toGoogleReq() {
 	//console.log(curPage);
 	request({
-url: "https://www.google.com.tw/search?q=%e5%b8%ab%e8%b3%87+OR+email+OR+e-mail+OR+%e4%bf%a1%e7%ae%b1+OR+%e9%83%b5%e4%bb%b6+site%3a" + domain + "&start=" + curPage,
+url: "https://www.google.com.tw/search?q=%e5%b8%ab%e8%b3%87+OR+email+OR+e-mail+OR+%e4%bf%a1%e7%ae%b1+OR+%e9%83%b5%e4%bb%b6+site%3a" + domain + "+-filetype:pdf+-filetype:doc&start=" + curPage,
 headers: {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36'},
 method: "GET"
 }, function(e,r,b) {
@@ -31,10 +31,6 @@ if (curPage <= pages) setTimeout(toGoogleReq, 10000);
 $ = cheerio.load(b);
 $('.srg>.g>.rc>.r>a').map(
 	function () {
-	regexa = /.pdf$/
-	regexb = /.doc$/
-	regexc = /.ppt$/
-	if (!(regexa.exec($(this).attr('data-href') || $(this).attr('href')) || regexb.exec($(this).attr('data-href') || $(this).attr('href')) || regexc.exec($(this).attr('data-href') || $(this).attr('href')))){
 	//console.log($(this).attr('data-href') || $(this).attr('href'))
 	request({
 url: $(this).attr('data-href') || $(this).attr('href'),
@@ -42,7 +38,7 @@ method: "GET"
 }, function(e,r,b) {
 //console.log(b)
 getMatches(b, mailregex, 1)
-})}
+})
 	}
 	)
 })
