@@ -31,7 +31,7 @@ function toGoogleReq() {
     $ = cheerio.load(b);
     $('.srg>.g>.rc>.r>a').map(
         function () {
-          console.log($(this).attr('data-href') || $(this).attr('href'))
+          //console.log($(this).attr('data-href') || $(this).attr('href'))
             request({
               url: $(this).attr('data-href') || $(this).attr('href'),
               method: "GET"
